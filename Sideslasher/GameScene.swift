@@ -15,22 +15,25 @@ struct PhysicsCategory {
     static let Barrier:  UInt32 = 0b10
     static let Platform:    UInt32 = 0b100
     static let Player: UInt32 = 0b1000
+    static let Floor: UInt32 = 0b10000
     }
 
 class GameScene:  SKScene, SKPhysicsContactDelegate {
     
-    var centerLine: SKSpriteNode!
-    var ball: SKSpriteNode!
-    var paddleOne: SKSpriteNode!
-    var paddleTwo: SKSpriteNode!
+    var player: SKSpriteNode!
+    var enemy: SKSpriteNode!
+    var barrier: SKSpriteNode!
+    var platform: SKSpriteNode!
+    var floor: SKSpriteNode!
     var scoreLine: SKSpriteNode!
-    var scoreLine2: SKSpriteNode!
     var scoreLabel1: SKLabelNode!
-    var scoreLabel2: SKLabelNode!
-    var rain: SKEmitterNode!
-    var rain2: SKEmitterNode!
     var points = 0
-    var points2 = 0
+    
+    //Player
+    let playerTexture = SKTexture(imageNamed: "Person Male-48")
+    player = SKSpritenode(texture: playertexture)
+    player.name = "player"
+
 //    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 //       /* Called when a touch begins */
 //        

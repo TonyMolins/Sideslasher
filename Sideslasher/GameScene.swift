@@ -7,39 +7,36 @@
 //
 
 import SpriteKit
+import AVFoundation
 
-class GameScene: SKScene {
-    override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!"
-        myLabel.fontSize = 45
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-        
-        self.addChild(myLabel)
+struct PhysicsCategory {
+    static let None:    UInt32 = 0
+    static let Enemy:    UInt32 = 0b1
+    static let Barrier:  UInt32 = 0b10
+    static let Platform:    UInt32 = 0b100
+    static let Player: UInt32 = 0b1000
     }
+
+class GameScene:  SKScene, SKPhysicsContactDelegate {
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
-        
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-        }
+    var centerLine: SKSpriteNode!
+    var ball: SKSpriteNode!
+    var paddleOne: SKSpriteNode!
+    var paddleTwo: SKSpriteNode!
+    var scoreLine: SKSpriteNode!
+    var scoreLine2: SKSpriteNode!
+    var scoreLabel1: SKLabelNode!
+    var scoreLabel2: SKLabelNode!
+    var rain: SKEmitterNode!
+    var rain2: SKEmitterNode!
+    var points = 0
+    var points2 = 0
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//       /* Called when a touch begins */
+//        
+//        for touch in touches {
+//          
+//        }
     }
-   
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
-    }
-}
+
+    
